@@ -10,15 +10,16 @@ openai.api_key = api_key
 def generate_rhyme():
     prompt = "Was reimt sich auf Summe"
 
-    # Set the endpoint to text-davinci-002
-    options = {
-        "prompt": prompt,
-        "max_tokens": 100,
-        "model": "text-davinci-002"
-    }
-
     try:
-        response = openai.Completion.create(options)
+        response = openai.Completion.create(
+            engine= "text-davinci-002",
+            prompt=prompt,
+            max_tokens=50,
+            n=1,
+            stop=None,
+            temperature=0.3,
+            )
+
         print(response["choices"][0]["text"])
     except Exception as e:
         print(e)
