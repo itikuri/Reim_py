@@ -1,5 +1,6 @@
 import openai
 import os
+import json
 
 # Read the API key from the environment
 api_key = os.environ.get('OPENAI_API_KEY')
@@ -20,8 +21,9 @@ def generate_rhyme():
             temperature=0.3,
             )
 
-        print(response["choices"][0]["text"])
+        rhyme = response["choices"][0]["text"]
+        return {'statusCode': 200, 'body': json.dumps(rhyme)}
     except Exception as e:
-        print(e)
+        return {'statusCode': 500, 'body': json.dumps(str(e))}
 
 generate_rhyme()
